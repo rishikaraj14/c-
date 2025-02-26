@@ -1,0 +1,53 @@
+#include <iostream>
+using namespace std;
+
+class Car {
+public :
+    int ID, dailyRate;
+    string model;
+    bool available;
+    
+    void accept() {
+        cout << "Enter Car ID: ";
+        cin >> ID;
+        cout << "Enter Model: ";
+        cin.ignore();
+        getline(cin, model);
+        cout << "Enter Daily Rental Rate: ";
+        cin >> dailyRate;
+        available = true;
+    }
+
+    void rentCar() {
+        if (available) {
+            available = false;
+            cout << model << " has been rented.\n";
+        } else {
+            cout << model << " is not available.\n";
+        }
+    }
+
+    void returnCar() {
+        available = true;
+        cout << model << " has been returned.\n";
+    }
+
+    double calculateRent(int days) {
+        return days * dailyRate;
+    }
+
+    void display() {
+        cout << "Car ID: " << ID << " | Model: " << model;
+        cout << " | Status: " << (available ? "Available" : "Rented") << endl;
+    }
+};
+
+int main() {
+    Car c1;
+    c1.accept();
+    c1.rentCar();
+    cout << "Total Rent for 5 days: " << c1.calculateRent(5) << endl;
+    c1.returnCar();
+    c1.display();
+    return 0;
+}
